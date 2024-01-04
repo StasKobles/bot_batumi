@@ -5,20 +5,35 @@ import { formatProduct } from "../../../utils/formatProducts/formatProducts";
 import { getProducts } from "../../../utils/getProducts/getProducts";
 
 export let cachedProducts: Product[] | null = null;
-export let sentMessageIds: number[] = [];
+export let sentMessageIds: number | null = null;
 
 export function setCachedProducts(products: Product[] | null) {
   cachedProducts = products;
 }
 
-export function resetSentMessageIds() {
-  sentMessageIds = [];
+export async function sendProductMessage(ctx: MyContext) {
+  if (cachedProducts && ctx.chat) {
+    const product = cachedProducts[ctx.session.currentProductIndex];
+    const message = formatProduct(ctx.t, product);
+    const keyboard = Markup.inlineKeyboard([
+      [
+        ...cachedProducts.map((_, index) =>
+          Markup.button.callback((index + 1).toString(), `product_${index}`)
+        ),
+      ],
+      [Markup.button.callback(ctx.t("add-to-cart"), `add_${product.id}`)],
+    ]).reply_markup;
+    if (sentMessageIds !== null) {
+      await ctx.deleteMessage(sentMessageIds);
+    }
+    const sentMessage = await ctx.replyWithPhoto(product.image_url, {
+      caption: message,
+      reply_markup: keyboard,
+      parse_mode: "Markdown",
+    });
+    sentMessageIds = sentMessage.message_id;
+  }
 }
-
-export function addSentMessageId(id: number) {
-  sentMessageIds.push(id);
-}
-
 export async function handleProductsCommand(ctx: MyContext) {
   if (ctx.message?.message_id && ctx.chat?.id) {
     await ctx.telegram.deleteMessage(ctx.chat.id, ctx.message.message_id);
@@ -27,21 +42,6 @@ export async function handleProductsCommand(ctx: MyContext) {
   if (!cachedProducts) {
     cachedProducts = await getProducts();
   }
-  sentMessageIds = []; // Сброс массива
-  for (const product of cachedProducts) {
-    const message = formatProduct(ctx.t, product);
-    const keyboard = Markup.inlineKeyboard([
-      Markup.button.callback(ctx.t("add-to-cart"), `add_${product.id}`),
-    ]).reply_markup;
-
-    const sentMessage = await ctx.replyWithPhoto(product.image_url, {
-      caption: message,
-      reply_markup: keyboard,
-      parse_mode: "Markdown",
-    });
-
-    if (sentMessage.message_id) {
-      sentMessageIds.push(sentMessage.message_id);
-    }
-  }
+  sentMessageIds = null; // Сброс массива
+  await sendProductMessage(ctx);
 }

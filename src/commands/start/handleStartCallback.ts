@@ -14,5 +14,22 @@ export async function handleStartCallback(
 
   ctx.session.language = data;
   await ctx.answerCbQuery();
-  await ctx.reply(ctx.t("welcomeMessage"));
+  await ctx.reply(ctx.t("welcomeMessage"), {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: ctx.t("productsList"), callback_data: "products_list" },
+          { text: ctx.t("preOrder"), callback_data: "pre_order" },
+        ],
+        [
+          { text: ctx.t("aboutShop"), callback_data: "about_shop" },
+          { text: ctx.t("rules"), callback_data: "rules" },
+        ],
+        [
+          { text: ctx.t("help"), callback_data: "help" },
+          { text: ctx.t("delivery"), callback_data: "delivery" },
+        ],
+      ],
+    },
+  });
 }

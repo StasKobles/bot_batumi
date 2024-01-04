@@ -40,5 +40,12 @@
   "orderSum": "Order Amount",
   "yourOrder": "Your Order",
   "thanksForOrder": "Thank you for your order! It has been successfully paid and will be processed shortly. Order amount:",
-  "welcomeMessage": "👋 Hey buddy! Welcome to our cozy little shop! 🍄✨\n\nWe're not just about mushrooms here, we've got legal, medicinal, and above all, soulful fungi! 🌱🌿\n\n🛒 Wanna check out our products? Hit → /products\n\n💳 **Payment? Easy-peasy!**\n- Georgian Card ✅\n- Russian Card ✅\n- Cryptocurrency 🪙\n\n🚚 **Delivery? No worries!**\n- Batumi 🛵\n- Surroundings? We got that too! 🚗\n\nSo feel free, pick and order! We're always glad to see you! 🤗"
+  "welcomeMessage": "👋 Hey buddy! Welcome to our cozy little shop! 🍄✨\n\nWe're not just about mushrooms here, we've got legal, medicinal, and above all, soulful fungi! 🌱🌿\n\n🛒 Wanna check out our products? Hit → /products\n\n💳 **Payment? Easy-peasy!**\n- Georgian Card ✅\n- Russian Card ✅\n- Cryptocurrency 🪙\n\n🚚 **Delivery? No worries!**\n- Batumi 🛵\n- Surroundings? We got that too! 🚗\n\nSo feel free, pick and order! We're always glad to see you! 🤗",
+  "productsList": "🍄 Product List",
+  "preOrder": "🔜 Pre-Order",
+  "aboutShop": "🏬 About Shop",
+  "rules": "📜 Rules",
+  "help": "❓ Help",
+  "delivery": "🚚 Delivery",
+  "choose-menu-option": "Choose a menu option"
 }

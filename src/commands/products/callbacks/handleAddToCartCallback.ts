@@ -23,9 +23,7 @@ export async function handleAddToCartCallback(
 
   // Удаляем все сообщения с товарами
   if (ctx.chat && sentMessageIds) {
-    for (const id of sentMessageIds) {
-      await ctx.telegram.deleteMessage(ctx.chat.id, id);
-    }
+    await ctx.telegram.deleteMessage(ctx.chat.id, sentMessageIds);
   }
 
   const keyboard = createAddToCartKeyboard(productId).reply_markup; // Убедитесь, что этот метод возвращает Telegraf-совместимую клавиатуру

@@ -1,18 +1,20 @@
 import { Telegraf } from "telegraf";
 import { handleCheckPayment } from "../../commands/cart/callback/handleCheckPayment";
-import { handleRequestAddress } from "../../commands/cart/callback/handleRequestAddress";
 import { handleChoosePayment } from "../../commands/cart/callback/handleChoosePayment";
+import { handleRequestAddress } from "../../commands/cart/callback/handleRequestAddress";
+import { handleGeorgianCardPayment } from "../../commands/cart/callback/paymentsMethods/payByGeorgianCard";
+import { handleRussianCardPayment } from "../../commands/cart/callback/paymentsMethods/payByRussianCard";
 import { handleAddToCartCallback } from "../../commands/products/callbacks/handleAddToCartCallback";
 import { handleClearCartCallback } from "../../commands/products/callbacks/handleClearCartCallback";
-import { handleMoreProductsCallback } from "../../commands/products/callbacks/handleMoreProductsCallback";
 import { handleSetQuantityCallback } from "../../commands/products/callbacks/handleSetQuantityCallback";
-import { cachedProducts } from "../../commands/products/command/handleProductsCommand";
+import {
+  cachedProducts,
+  handleProductsCommand,
+  sendProductMessage,
+} from "../../commands/products/command/handleProductsCommand";
 import { handleStartCallback } from "../../commands/start/handleStartCallback";
 import { MyContext } from "../../models/types/MyContext";
 import { Languages } from "../../models/types/Session";
-import { payByCrypto } from "../../commands/cart/callback/paymentsMethods/payByCrypto";
-import { handleRussianCardPayment } from "../../commands/cart/callback/paymentsMethods/payByRussianCard";
-import { handleGeorgianCardPayment } from "../../commands/cart/callback/paymentsMethods/payByGeorgianCard";
 
 export async function createCallbackQuery(bot: Telegraf<MyContext>) {
   bot.on("callback_query", async (ctx) => {
@@ -43,11 +45,6 @@ export async function createCallbackQuery(bot: Telegraf<MyContext>) {
           quantity,
           messageId
         );
-      } else if (data === "more_products") {
-        await handleMoreProductsCallback(
-          ctx,
-          ctx.callbackQuery.message?.message_id
-        );
       } else if (data === "checkout") {
         await handleChoosePayment(ctx, ctx.callbackQuery.message?.message_id);
       } else if (data === "clear_cart") {
@@ -69,6 +66,22 @@ export async function createCallbackQuery(bot: Telegraf<MyContext>) {
           ctx,
           ctx.callbackQuery.message?.message_id
         );
+      } else if (data === "products_list") {
+        await ctx.deleteMessage(ctx.message);
+        await handleProductsCommand(ctx);
+      } else if (data === "about_shop") {
+        await ctx.sendMessage(ctx.t("about_shop_test_message"));
+      } else if (data === "rules") {
+        await ctx.sendMessage(ctx.t("rules_test_message"));
+      } else if (data === "help") {
+        await ctx.sendMessage(ctx.t("help_test_message"));
+      } else if (data === "delivery") {
+        await ctx.sendMessage(ctx.t("delivery_test_message"));
+      } else if (data === "pre_order") {
+        await ctx.sendMessage(ctx.t("preOrder_test_message"));
+      } else if (data.startsWith(`product`)) {
+        ctx.session.currentProductIndex = parseInt(data.split("_")[1]);
+        await sendProductMessage(ctx);
       }
     }
   });

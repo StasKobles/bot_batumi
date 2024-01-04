@@ -26,4 +26,5 @@ export interface SessionData {
   invoice?: Invoice;
   address: Address;
   addressStage: AddressStage;
+  currentProductIndex:number;
 }

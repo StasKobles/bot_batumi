@@ -20,7 +20,7 @@ export const createCartActionKeyboard = (t: MyContext["t"]) => {
   return {
     reply_markup: {
       inline_keyboard: [
-        [{ text: t("look-more"), callback_data: "more_products" }],
+        [{ text: t("look-more"), callback_data: "products_list" }],
         [{ text: t("go-to-payment"), callback_data: "checkout" }],
         [{ text: t("clear-cart"), callback_data: "clear_cart" }],
       ],
@@ -33,6 +33,27 @@ export const createAddToCartButton = (ctx: MyContext, productId: number) => {
     reply_markup: {
       inline_keyboard: [
         [{ text: ctx.t("add-to-cart"), callback_data: `add_${productId}` }],
+      ],
+    },
+  };
+};
+
+export const mainMenuKeyboard = (t: MyContext["t"]) => {
+  return {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: t("productsList"), callback_data: "products_list" },
+          { text: t("preOrder"), callback_data: "pre_order" },
+        ],
+        [
+          { text: t("aboutShop"), callback_data: "about_shop" },
+          { text: t("rules"), callback_data: "rules" },
+        ],
+        [
+          { text: t("help"), callback_data: "help" },
+          { text: t("delivery"), callback_data: "delivery" },
+        ],
       ],
     },
   };

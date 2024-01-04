@@ -11,6 +11,7 @@ export const setupSession: Middleware<MyContext> = (ctx, next) => {
       language: "en",
       lastCartMessageId: null,
       totalPrice: 0,
+      currentProductIndex: 0,
     };
   }
 

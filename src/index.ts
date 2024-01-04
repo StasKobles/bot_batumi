@@ -9,6 +9,7 @@ import { setupSession } from "./config/setupSession";
 import { MyContext } from "./models/types/MyContext";
 import { createCallbackQuery } from "./utils/callbackQuery/callbackQuery";
 import { handlerSuccessfulPayment } from "./commands/cart/callback/paymentsMethods/handlerSuccessfulPayment";
+import { menuCommand } from "./commands/menu/command/MenuCommand";
 
 const bot = new Telegraf<MyContext>(botToken);
 
@@ -19,6 +20,7 @@ createCallbackQuery(bot);
 startCommand(bot);
 productsCommand(bot);
 cartCommand(bot);
+menuCommand(bot);
 
 handlerShippingQuery(bot);
 handlerSuccessfulPayment(bot);
