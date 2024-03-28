@@ -4,7 +4,7 @@ import { btcPayApiKey, btcPayBaseUrl, btcPayStoreId } from "../../config";
 import { BTCPayInvoice, BTCPayInvoiceCheck, BTCPayInvoiceResponse, OrderParams } from "./types";
 
 export async function getBtcPayInvoices(): Promise<string> {
-  const agent = new SocksProxyAgent("socks5h://localhost:9150");
+  const agent = new SocksProxyAgent("socks5h://localhost:9050");
 
   return new Promise((resolve, reject) => {
     const req = http.get(
@@ -35,7 +35,7 @@ export async function createBtcPayInvoice(orderParams:OrderParams): Promise<BTCP
     receipt[item.title] = itemTotal;
     return receipt;
   }, {} as Record<string, string>);
-  const agent = new SocksProxyAgent("socks5h://localhost:9150");
+  const agent = new SocksProxyAgent("socks5h://localhost:9050");
 
   // Тестовые данные инвойса
   const invoiceData: BTCPayInvoice = {
