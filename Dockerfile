@@ -10,6 +10,9 @@ COPY package*.json ./
 # Установите зависимости
 RUN npm install
 
+# Установите ts-node
+RUN npm install ts-node -g
+
 # Скопируйте исходный код приложения в контейнер
 COPY . .
 
