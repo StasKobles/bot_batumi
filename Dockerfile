@@ -18,6 +18,9 @@ RUN npm install
 # Установите ts-node
 RUN npm install ts-node -g
 
+# Тестовая утилита
+RUN apt-get update && apt-get install -y iproute2
+
 # Скопируйте исходный код приложения в контейнер
 COPY . .
 
