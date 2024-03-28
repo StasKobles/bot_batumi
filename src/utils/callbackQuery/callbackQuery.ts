@@ -15,6 +15,9 @@ import {
 import { handleStartCallback } from "../../commands/start/handleStartCallback";
 import { MyContext } from "../../models/types/MyContext";
 import { Languages } from "../../models/types/Session";
+import { handleHelpCommand } from "../../commands/help/command/helpCommand";
+import { checkCryptoPaymentStatus } from "../../services/btcPayServerApi/getInvoices";
+import { adminId } from "../../config";
 
 export async function createCallbackQuery(bot: Telegraf<MyContext>) {
   bot.on("callback_query", async (ctx) => {
@@ -70,18 +73,66 @@ export async function createCallbackQuery(bot: Telegraf<MyContext>) {
         await ctx.deleteMessage(ctx.message);
         await handleProductsCommand(ctx);
       } else if (data === "about_shop") {
-        await ctx.sendMessage(ctx.t("about_shop_test_message"));
+        await ctx.deleteMessage(ctx.message);
+        await ctx.sendMessage(ctx.t("aboutShopMessage"), {
+          parse_mode: "Markdown",
+        });
       } else if (data === "rules") {
-        await ctx.sendMessage(ctx.t("rules_test_message"));
-      } else if (data === "help") {
-        await ctx.sendMessage(ctx.t("help_test_message"));
+        await ctx.deleteMessage(ctx.message);
+        await ctx.sendMessage(ctx.t("storeRules"));
+      } else if (data === "help_action") {
+        handleHelpCommand(ctx);
       } else if (data === "delivery") {
-        await ctx.sendMessage(ctx.t("delivery_test_message"));
+        await ctx.deleteMessage(ctx.message);
+        await ctx.sendMessage(ctx.t("deliveryInfo"));
       } else if (data === "pre_order") {
-        await ctx.sendMessage(ctx.t("preOrder_test_message"));
+        await ctx.deleteMessage(ctx.message);
+        await ctx.sendMessage(ctx.t("preOrderInfo"));
       } else if (data.startsWith(`product`)) {
         ctx.session.currentProductIndex = parseInt(data.split("_")[1]);
         await sendProductMessage(ctx);
+      } else if (data.startsWith("check_cryptopayment")) {
+        const id = data.split("_")[2];
+        const paymentStatus = await checkCryptoPaymentStatus(id);
+        if (paymentStatus.status === "New") {
+          await ctx.sendMessage(ctx.t("payment_pending"));
+        }
+        if (paymentStatus.status === "Settled") {
+          // Получаем валюту и сумму
+          const totalAmount = ctx.session.totalPrice;
+
+          // Сформируем сообщение для админа
+          // Получаем корзину из сессии
+          const cartItems = ctx.session.cart;
+
+          // Формируем строку с перечнем заказанных товаров
+          let itemsList = "Заказанные товары:\n";
+          cartItems.forEach((item) => {
+            itemsList += `- ${item.name} (ID: ${item.id}, Количество: ${item.quantity}, Цена: ${item.price})\n`;
+          });
+
+          // Добавляем эту строку в сообщение для админа
+          const adminMessage = `
+                Новый успешный заказ!
+                Имя пользователя: ${ctx.from?.first_name} ${ctx.from?.last_name}, tg://user?id=${ctx.from?.id}
+                ${itemsList}
+                Сумма: ${totalAmount} GEL
+                Адрес доставки: ${ctx.session.address}
+              `;
+
+          // Отправляем сообщение админу
+          await ctx.telegram.sendMessage(adminId, adminMessage);
+
+          // Отправляем сообщение пользователю
+          await ctx.reply(`${ctx.t("thanksForOrder")} ${totalAmount} GEL`);
+          await ctx.editMessageText(ctx.t("payment_success"));
+
+          await ctx.sendMessage(ctx.t("payment_success"));
+        }
+        if (paymentStatus.status === "Expired") {
+          await ctx.sendMessage(ctx.t("payment_expired"));
+          await ctx.editMessageReplyMarkup({ inline_keyboard: [] });
+        }
       }
     }
   });

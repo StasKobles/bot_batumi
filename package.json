@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "@foile/crypto-pay-api": "^1.0.4",
-    "axios": "^1.5.1",
+    "axios": "^1.6.7",
+    "currency-converter-lt": "^2.0.1",
     "dotenv": "^16.3.1",
     "pg": "^8.11.3",
+    "socks-proxy-agent": "^8.0.2",
     "telegraf": "^4.14.0",
     "uuid": "^9.0.1",
     "xml2js": "^0.6.2"
@@ -19,7 +21,7 @@
   "author": "Stas Kobles",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^20.8.5",
+    "@types/node": "^20.11.15",
     "@types/pg": "^8.10.7",
     "@types/uuid": "^9.0.6",
     "@types/xml2js": "^0.4.13",

@@ -8,10 +8,6 @@ export async function handleRequestAddress(
   if (ctx.chat && message_id) {
     await ctx.telegram.deleteMessage(ctx.chat.id, message_id);
   }
-
-  // Начинаем процесс ввода адреса
-  ctx.session.address = {};
-  ctx.session.addressStage = "city";
-
+  ctx.session.address = 'ready'
   await ctx.reply(ctx.t("enter-city"));
 }
