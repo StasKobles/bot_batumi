@@ -11,6 +11,10 @@ const yooKassaApiKey = process.env.YOO_KASSA_API_KEY || "";
 const smartGlocalApiKey = process.env.SMART_GLOCAL_API_KEY || "";
 const adminId = process.env.ADMIN_ID || "";
 
+const btcPayApiKey = process.env.BTC_PAY_API_KEY || "";
+const btcPayBaseUrl = process.env.BTC_PAY_BASE_URL || "";
+const btcPayStoreId = process.env.BTC_PAY_STORE_ID || "";
+
 // Экспортируйте переменные
 export {
   botToken,
@@ -23,4 +27,7 @@ export {
   yooKassaApiKey,
   smartGlocalApiKey,
   adminId,
+  btcPayApiKey,
+  btcPayBaseUrl,
+  btcPayStoreId
 };

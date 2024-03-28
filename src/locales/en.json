@@ -23,7 +23,7 @@
   "pay-button": "Pay Now",
   "check-payment-button": "Check Payment Status",
   "error-getting-crypto-rates": "Error getting cryptocurrency rates. Please try again later.",
-  "enter-city": "Please enter your city or locality:",
+  "enter-city": "Please enter your delivery address:",
   "enter-street": "Now enter your street:",
   "enter-house": "Now enter your house number:",
   "enter-apartment": "Now enter your apartment or suite number (if any):",
@@ -43,9 +43,18 @@
   "welcomeMessage": "👋 Hey buddy! Welcome to our cozy little shop! 🍄✨\n\nWe're not just about mushrooms here, we've got legal, medicinal, and above all, soulful fungi! 🌱🌿\n\n🛒 Wanna check out our products? Hit → /products\n\n💳 **Payment? Easy-peasy!**\n- Georgian Card ✅\n- Russian Card ✅\n- Cryptocurrency 🪙\n\n🚚 **Delivery? No worries!**\n- Batumi 🛵\n- Surroundings? We got that too! 🚗\n\nSo feel free, pick and order! We're always glad to see you! 🤗",
   "productsList": "🍄 Product List",
   "preOrder": "🔜 Pre-Order",
+  "your-address": "Your address",
   "aboutShop": "🏬 About Shop",
+  "aboutShopMessage": "🏬 About Our Shop 🏬\n\n🍄 *Passion for Mushrooms*: Our shop is more than just a place to buy mushrooms. It's a philosophy of pleasure and health care.\n💚 *Love for Nature*: Each mushroom is carefully grown, dried, and tested to meet the highest quality standards.\n🤝 *Personal Touch*: We strive to convey a piece of our soul and the warmth of our hearts in every order.\n💡 *Innovation and Quality*: Our approach is based on innovation and the desire to share only the best with you.",
   "rules": "📜 Rules",
   "help": "❓ Help",
   "delivery": "🚚 Delivery",
-  "choose-menu-option": "Choose a menu option"
+  "choose-menu-option": "Choose a menu option",
+  "preHelpMessage": "Please describe the problem you are facing. We will definitely help you",
+  "deliveryInfo": "🚚 Your mushrooms are on the way! 🍄\n\nWe offer two delivery options to meet all your needs:\n\nFree Delivery - patience is rewarded! Order today, and your mushrooms will arrive within 2-3 days. No rush, no extra costs. 🍃🐢\n\nExpress Delivery - need it urgently? No problem! Your order will be with you on the same day. Fast as lightning! ⚡🚀\n\nChoose what's best for you. We are here to deliver joy! 🌟",
+  "storeRules": "📜 Store Rules 📜\n1. All products in the store are completely legal and comply with local laws. 🌿\n2. Payment is accepted in cryptocurrency, as well as on Georgian and Russian cards. 💳\n3. Delivery is carried out within 2-3 business days. Express delivery is available for an additional fee. 🚚\n4. Returns are possible within 7 days of purchase provided the product is in its original condition and the packaging is unopened. 📦\n5. For any questions or suggestions, please contact customer support. 📞",
+  "preOrderInfo":"🔜 Bulk Pre-Order 🔜\n\nWe highly value each of our customers and aim to provide a special approach. To place a bulk pre-order, please contact our manager at this @kobles. We are ready to offer you the best terms and individual service!",
+  "sending_request": "Sending request...",
+  "payment_expired": "Payment has expired. Please create a new order.",
+  "onion-link": "Please note: The provided link is an Onion link, intended for use within the Tor network. To access this link, please follow these steps:\n1. Download and install the Tor Browser from the official website https://www.torproject.org/.\n2. Once installed, open the Tor Browser.\n3. Enter or paste the provided Onion link into the address bar of the Tor Browser and press Enter.\nThe link can only be correctly accessed through the Tor Browser, as it is designed for anonymous and secure browsing within the Tor network."
 }

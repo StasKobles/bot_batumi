@@ -2,13 +2,6 @@ import { Invoice } from "../../commands/cart/types";
 
 export type Languages = "ru" | "en" | "ka";
 
-interface Address {
-  city?: string;
-  street?: string;
-  house?: string;
-  apartment?: string;
-}
-
 export interface CartItem {
   name: string; // Название товара
   id: number;
@@ -16,7 +9,6 @@ export interface CartItem {
   price: number; // Цена за одну единицу
 }
 
-type AddressStage = "city" | "street" | "house" | "apartment" | undefined;
 
 export interface SessionData {
   language: Languages;
@@ -24,7 +16,7 @@ export interface SessionData {
   lastCartMessageId: number | null;
   totalPrice: number;
   invoice?: Invoice;
-  address: Address;
-  addressStage: AddressStage;
-  currentProductIndex:number;
+  address: string;
+  currentProductIndex: number;
+  helpStep: boolean;
 }

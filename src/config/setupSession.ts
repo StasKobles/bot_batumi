@@ -5,13 +5,13 @@ import { translate } from "../services/translate/translate";
 export const setupSession: Middleware<MyContext> = (ctx, next) => {
   if (!ctx.session) {
     ctx.session = {
-      address: {},
-      addressStage: undefined,
+      address: '',
       cart: [],
       language: "en",
       lastCartMessageId: null,
       totalPrice: 0,
       currentProductIndex: 0,
+      helpStep: false,
     };
   }
 

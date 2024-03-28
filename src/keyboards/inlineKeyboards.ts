@@ -51,7 +51,7 @@ export const mainMenuKeyboard = (t: MyContext["t"]) => {
           { text: t("rules"), callback_data: "rules" },
         ],
         [
-          { text: t("help"), callback_data: "help" },
+          { text: t("help"), callback_data: "help_action" },
           { text: t("delivery"), callback_data: "delivery" },
         ],
       ],

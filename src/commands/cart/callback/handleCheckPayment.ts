@@ -6,7 +6,6 @@ export async function handleCheckPayment(ctx: MyContext) {
   if (ctx.session.invoice?.invoice_id) {
     const result = await checkPaymentsStatus(ctx.session.invoice.invoice_id);
     if (result) {
-      const shippingAddress = `City: ${ctx.session.address.city}, Street: ${ctx.session.address.street}, House: ${ctx.session.address.house}, Apartment: ${ctx.session.address.apartment}`;
       // Получаем валюту и сумму
       const totalAmount = ctx.session.totalPrice;
 
@@ -26,7 +25,7 @@ export async function handleCheckPayment(ctx: MyContext) {
           Имя пользователя: ${ctx.from?.first_name} ${ctx.from?.last_name}, tg://user?id=${ctx.from?.id}
           ${itemsList}
           Сумма: ${totalAmount} GEL
-          Адрес доставки: ${shippingAddress}
+          Адрес доставки: ${ctx.session.address}
         `;
 
       // Отправляем сообщение админу
