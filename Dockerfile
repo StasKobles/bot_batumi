@@ -4,6 +4,11 @@ FROM node:latest
 # Установите рабочую директорию внутри контейнера
 WORKDIR /usr/src/app
 
+# Установите Tor и другие зависимости
+RUN apt-get update && \
+    apt-get install -y tor && \
+    rm -rf /var/lib/apt/lists/*
+
 # Скопируйте файлы зависимостей и package.json для установки зависимостей
 COPY package*.json ./
 
