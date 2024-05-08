@@ -18,7 +18,7 @@ RUN npm install
 RUN npm install ts-node -g
 
 # Установите Tor и запустите его
-RUN tor -f /etc/tor/torrc --runasdaemon
+RUN tor -f /etc/tor/torrc &
 
 # Копируйте исходный код приложения в контейнер
 COPY . .
